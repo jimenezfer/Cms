@@ -1,29 +1,36 @@
 html { height: 100%; width: 100%; }
 body { width: 100%; height: 100%; margin:0px; padding:0px; border:0px; background-color:#a3b18a;}
-h3 {position: relative; left: 80%;bottom: 39px;}
-h2 {position: relative;left: 200px; float: right;font-family: 'Oswald', sans-serif;}
-a {font-family: 'Oswald', sans-serif;color: #fff99f;text-decoration: none;}
+a{text-decoration: none;font-family: 'Oswald', sans-serif;}
 
 
+.selected{font-weight: bold;font-size: 20px;}
+.probos{position: fixed;left: 480px;bottom:320px;width: 200px;height: 200px;background-color: #ffffff;}
+.message{position: relative;left: 300px;font-family: 'Oswald', sans-serif;font-size: 30px;bottom: 100px;}
 
-.cuadro{background-color: #a2ad59;}
-.prueba{width: 25px; height: 25px; background-color: #a23d99;}
+.forma{
+	position: fixed;
+	left:300px;
+	bottom:220px;
+	font-family: 'Oswald', sans-serif;
+	font-size: 12px;
+}
 
+#confirmado{
+	position: relative;
+	top:200px;
+}
 
-	
 #titulo{
 
 	position: relative;
-	left: 25px;
+	left: 10px;
 	top: -11px;
 	font-family: 'Oswald', sans-serif;
 	font-size: 30px;
 	color: #fff99f;
 }
 
-
 #header{
-
 	width:100%;
 	height: 70px;
 	background-color:#152614;
@@ -32,9 +39,6 @@ a {font-family: 'Oswald', sans-serif;color: #fff99f;text-decoration: none;}
 	padding: 0px;
 	text-align: left;
 	color: #1e881e;
-	
-
-
 }
 
 #main {
@@ -46,57 +50,30 @@ a {font-family: 'Oswald', sans-serif;color: #fff99f;text-decoration: none;}
 	top: 70px;
 	margin:0px; padding:1em; border:0px;
 	display: inline-block;
-
-
-
 }
 
-#footer { 
+#footer {
 
-height: 90px;
-width: 99.6%;
-margin:0px; 
-padding:0px;
-background-color:#152614;
-color:#1e881e;
-font-family: 'Oswald', sans-serif;
-position: relative;
-bottom: 40px;
-
-
-
+	height: 90px;
+	width: 99.6%;
+	margin:0px;
+	padding:0px;
+	background-color:#152614;
+	color:#1e881e;
+	font-family: 'Oswald', sans-serif;
+	position: relative;
+	bottom: 0px;
 
 }
 
 ul li {
-
 	list-style: none;
 	position: relative;
 	right: 19px;
 }
 
 ul li a {
-
 	text-decoration: none;
 	font-family: 'Oswald', sans-serif;
 	color: #97cc04;
-	
-
-
-
 }
-
-.selected{font-weight: bolder;font-size: 20px;}
-
-
-
-
-
-
-
-
-
-
-
-
-

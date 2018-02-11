@@ -1,61 +1,55 @@
-<?php  include_once("includes/connection.php"); //Creates connection and selects Db ?>
-<?php include_once("includes/functions.php"); //Functions folder ?>
+<?php require_once("includes/session.php"); ?>
+<?php require_once("includes/connection.php"); //Creates connection and selects Db ?>
+<?php require_once("includes/functions.php"); //Functions folder ?>
+<?php require_once("includes/validation_functions.php"); ?>
 <?php
 
-	//Form Validation, make sure not empty and that is set.
-$errors = array();
-$required_fields = array('name','menu_name','visible');
-foreach ($required_fields as $key => $fieldname) {
-	if (isset($_POST[$fieldname]) || empty($_POST[$fieldname])) {
-	$errors[] = $fieldname;
-	}
+if (isset($_POST["submit"])){
+
+$menu_name = mysql_prep($_POST["menu_name"]);
+$position = (int) $_POST["position"];
+$visible = (int) $_POST["visible"];
+
+//$menu_name = mysql_prep($menu_name);
+$required_fields = array("menu_name", "position", "visible");
+validate_presences($required_fields);
+
+$fields_with_max_lengths = array("menu_name => 30");
+validate_max_lengths($fields_with_max_lengths);
 }
 
-// Not longer than 30 characters since it may break the code.
-$field_with_names = array('menu_name' => 30);
-foreach($fields_with_lenghts as $fieldname => $maxlenght ) {
-	if (strlen(trim(mysql_prep($_POST[$fieldname]))) > $maxlenght) {
-		$errors[] = $fieldname;
-	}
+if (!empty($errors)) {
+   $_SESSION["errors"] = $errors;
+   redirect_to("new_subject.php");
+
 }
 
 
-if(empty($errors)) {
+      $query  = "INSERT INTO subjects (";
+      $query .= " menu_name, position, visible";
+      $query .= ") VALUES(";
+      $query .= " '{$menu_name}', {$position}, {$visible}";
+      $query .= ")";
 
-$id = mysql_prep($_GET['subj'];
-$menu_name = mysql_prep($_POST['menu_name']);
-$position = mysql_prep($_POST['position']);
-$visible = mysql_prep($_POST['visible']);
+      $result = mysqli_query($db, $query);
 
+      if ($result){
+         $_SESSION["message"] = "Subject Created!";
+         redirect_to("content.php");
 
+      } else {
+         //failure , mysql rejected the query.
+         $_SESSION["message"] = "<div id=\"confirmado\" >Subject Creation Failed! Ah Shit!</div>";
+         redirect_to("new_subject.php");
+      } //else {
+         //probably a GET request
+         //redirect_to("new_subject.php");
+      //}
+//}
+      ?>
 
-
-	} else {
-
-		// Errors occured
-	}
-
-
-
-
-?>
-<?php
-
-	$query = "INSERT INTO subjects (
-			menu_name, position, visible
-			) VALUES (
-			'{$menu_name}',{$position},{$visible}
-			)";
-			$result = mysql_query($query, $db);
-			if($result){
-				//Sucess!!
-				header("Location: content.php");
-				exit;
-			}else{
-				//Display Error
-				echo "<p>Subject Creation Error</p>";
-				echo "<p>" . mysql_error() . "</p>";
-
-			}
-?>
-<?php mysql_close($db); ?>
+      <?php
+         if (isset($db)) {
+               mysqli_close($db);
+                         }
+       ?>

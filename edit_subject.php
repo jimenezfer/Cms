@@ -1,108 +1,112 @@
-<?php  include_once("includes/connection.php"); //Creates connection and selects Db ?>
-<?php include_once("includes/functions.php"); //Functions folder ?>
-<?php 
-
-if(intval($_GET['subj']) == 0) {
-
-	redirect_to("content.php");
-}
-
-if (isset($_POST['submit'])) {
-
-$errors = array();
-
-$required_fields = array('menu_name','position','visible');
-foreach ($required_fields as $key => $fieldname) {
-	if (isset($_POST[$fieldname]) || empty($_POST[$fieldname])) {
-	$errors[] = $fieldname;
-	}
-}
-
-
-$fields_with_lenghts = array('menu_name' => 30);
-foreach($fields_with_lenghts as $fieldname => $maxlenght ) {
-	if (strlen(trim(mysql_prep($_POST[$fieldname]))) > $maxlenght ) {
-		$errors[] = $fieldname; }
-
-}				
-		if(empty($errors)){
-				$id = mysql_prep($_GET['subj']);
-				$menu_name = mysql_prep($_POST['menu_name']);
-				$position = mysql_prep($_POST['position']);
-				$visible = mysql_prep($_POST['visible']);
-
-				$query = "UPDATE subjects SET 
-				menu_name = '{$menu_name}',
-				position = '{$position}',
-			    visible = '{$visible}' WHERE id = {$id}";
-
-			    $result = mysql_query($query, $db);
-			    if (mysql_affected_rows() == 1) {
-			    	# code...
-			    }else{
-
-
-			    }
-			
-}
-
-?>
+<?php require_once("includes/session.php"); ?>
+<?php require_once("includes/connection.php"); //Creates connection and selects Db ?>
+<?php require_once("includes/functions.php"); //Functions folder ?>
+<?php require_once("includes/validation_functions.php"); //Functions folder ?>
 <?php
-
 //This function runs the loop checks and makes data gathered with fetch() available.
 find_selected_page();
 
 ?>
-<?php include("includes/header.php"); ?>
-<table id="structure">
-	<tr>
-	  <td id="navigation">
-<?php echo navigation($sel_subject,$sel_page); ?>		
-	 </td>
-	 		<td id="page">
-<h2>Edit subject:</br></br><?php echo $sel_subject['menu_name']; ?></h2>
+<?php
+  if (!$sel_subject){
 
-<form action="edit_subject.php?subj=<?php echo urlencode($sel_subject['id']); ?>" method="post" >
+    //redirect_to("content.php");
+    echo "No NO NONONONONONO";
+  }
+  ?>
+<?php
+if (isset($_POST['submit'])) {
+	// Process the form
 
-<h2>Subject Name: <input type="text" name="menu_name" value="<?php echo $sel_subject['menu_name']; ?>" id="menu_name" ></h2>
+	// validations
+	$required_fields = array("menu_name", "position", "visible");
+	validate_presences($required_fields);
 
-<h2>Position: <select name="position">
+	$fields_with_max_lengths = array("menu_name" => 30);
+	validate_max_lengths($fields_with_max_lengths);
 
-<?php $subject_set = get_all_subjects();
-	  $subject_count = mysql_num_rows($subject_set);
-	  //subject_count +1 cuz I am adding one more subject.
-	  for ($count=1; $count <= $subject_count+1; $count++) { 
-	  	echo "<option value=\"{$count}\"";
-	  	if ($sel_subject['position'] == $count) {
-	  	 echo " selected";
-	  	}
-	  	echo ">{$count}</option>";
-	  }
+	if (empty($errors)) {
+
+		// Perform Update
+
+		$id = $sel_subject["id"];
+		$menu_name = mysql_prep($_POST["menu_name"]);
+		$position = (int) $_POST["position"];
+		$visible = (int) $_POST["visible"];
+
+		$query  = "UPDATE subjects SET ";
+		$query .= "menu_name = '{$menu_name}', ";
+		$query .= "position = {$position}, ";
+		$query .= "visible = {$visible} ";
+		$query .= "WHERE id = {$id} ";
+		$query .= "LIMIT 1";
+		$result = mysqli_query($db, $query);
+
+		if ($result && mysqli_affected_rows($db) >= 0) {
+			// Success
+			$_SESSION["message"] = "Subject updated.";
+			redirect_to("content.php");
+		} else {
+			// Failure
+			$_SESSION["message"] = "Subject update failed.";
+		}
+
+	}
+} else {
+	// This is probably a GET request
+
+} // end: if (isset($_POST['submit']))
+
 ?>
-	
 
-</select>
-</h2>
+<?php require_once("includes/header.php"); ?>
 
-<h2>Visible:</br> <input type="radio" name="visible" value="0" <?php if ($sel_subject['visible'] = 0) {
-	echo " checked";
-} ?> />No
-&nbsp;
-<input type="radio" name="visible" value="1" <?php if ($sel_subject['visible'] = 1) {
-	echo " checked";
-} ?> />Yes
+<div>
+  <div id="navigation">
+    <?php echo navigation($sel_subject,$sel_page); ?>
 
-<input type="submit" value="Edit Subject" name="submit" />
+  </div>
 
-</h2>
+</div>
+<?php // $message is just a variable, doesn't use the SESSION
+			if (!empty($message)) {
+				echo "<div class=\"message\">" . htmlentities($message) . "</div>";
+			}
+?>
+<?php echo form_errors($errors); ?>
+</div>
+  <div class="forma">
+    <form  action="edit_subject.php?subj=<?php echo urlencode($sel_subject["id"]); ?>" method="post">
+        <h2>Edit Subject:<?php echo " ";?><?php echo $sel_subject["menu_name"]; ?></h2>
+      <h2 >Subject name:</h2>
+          <input type="text" name="menu_name" value="<?php echo $sel_subject["menu_name"]; ?>"  />
 
+      </h2>
+      <h2><p>Position:</p>
+        <select  name="position">
+          <?php
+          $subject_set = find_all_subjects();
+          $subject_count = mysqli_num_rows($subject_set);
+          for($count=1; $count <= $subject_count; $count++){
+            echo "<option value=\"{$count}\"";
+            if($sel_subject["position"] == $count){
+             echo " selected";
+            }
+            echo ">{$count}</option>";
+          }
+          ?>
+        </select>
+      </h2>
+      <h2>Visible:
 
-
-
-</form>
-<a href="content.php" ><h2>Cancel</h2></a>
-	</td>
-		</tr>
-			</table>
-
+          <input type="radio" name="visible" value="0" <?php if($sel_subject["visible"] == 0){echo "checked"; }  ?> />No
+          &nbsp;
+          <input  type="radio" name="visible" value="1" <?php if($sel_subject["visible"] == 1){echo "checked"; } ?> />Yes
+          </br></br>
+          <input type="submit" name="submit" value="Edit Subject"  />
+          </br></br>
+          <a href="content.php">Cancel</a>
+      </h2>
+  </form>
+  </div>
 <?php require("includes/footer.php"); ?>

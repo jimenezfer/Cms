@@ -1,12 +1,12 @@
 </div>
 
-		
+
 	<div id="footer"><h3>Copyright 2017, Fox_Corp</h3></div>
-	
+
  </body>
  </html>
- <?php 
+ <?php
  		if (isset($db)) {
- 					mysql_close($db);
+ 					mysqli_close($db);
  						}
   ?>
