@@ -5,6 +5,8 @@
 <?php
 //This function runs the loop checks and makes data gathered with fetch() available.
 find_selected_page();
+//temporary solution
+$id = $_GET["subject"];
 
 ?>
 <?php
@@ -78,7 +80,7 @@ if (isset($_POST['submit'])) {
   <div class="forma">
     <form  action="edit_subject.php?subject=<?php echo urlencode($sel_subject["id"]); ?>" method="post">
         <h2>Edit Subject:<?php echo " ";?><?php echo $sel_subject["menu_name"]; ?></h2>
-      <h2 >Subject name:</h2>
+        <h2>Subject name:</h2>
           <input type="text" name="menu_name" value="<?php echo $sel_subject["menu_name"]; ?>"  />
 
       </h2>
@@ -106,6 +108,8 @@ if (isset($_POST['submit'])) {
           <input type="submit" name="submit" value="Edit Subject"  />
           </br></br>
           <a href="content.php">Cancel</a>
+          &nbsp;
+          <a href="delete_content.php?subject=<?php echo $id; ?>">Delete Subject</a>
       </h2>
   </form>
   </div>

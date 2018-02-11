@@ -19,7 +19,7 @@ find_selected_page();
       <h2 ><p>Position:</p>
         <select  name="position">
           <?php
-          $subject_set = get_all_subjects();
+          $subject_set = find_all_subjects();
           $subject_count = mysqli_num_rows($subject_set);
           for($count=1; $count <= ($subject_count + 1); $count++){
             echo "<option value=\"{$count}\">{$count}</option>";
