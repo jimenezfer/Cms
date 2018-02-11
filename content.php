@@ -8,7 +8,6 @@
 find_selected_page();
 ?>
 <div>
-	<!--TWO-->
   <div id="navigation">
 		<?php echo navigation($sel_subject, $sel_page); ?>
 		<br />

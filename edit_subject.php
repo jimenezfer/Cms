@@ -10,8 +10,8 @@ find_selected_page();
 <?php
   if (!$sel_subject){
 
-    //redirect_to("content.php");
-    echo "No NO NONONONONONO";
+    redirect_to("content.php");
+
   }
   ?>
 <?php
@@ -76,7 +76,7 @@ if (isset($_POST['submit'])) {
 <?php echo form_errors($errors); ?>
 </div>
   <div class="forma">
-    <form  action="edit_subject.php?subj=<?php echo urlencode($sel_subject["id"]); ?>" method="post">
+    <form  action="edit_subject.php?subject=<?php echo urlencode($sel_subject["id"]); ?>" method="post">
         <h2>Edit Subject:<?php echo " ";?><?php echo $sel_subject["menu_name"]; ?></h2>
       <h2 >Subject name:</h2>
           <input type="text" name="menu_name" value="<?php echo $sel_subject["menu_name"]; ?>"  />
