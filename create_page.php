@@ -24,7 +24,7 @@ if (!empty($errors)) {
 }
 
 
-      $query  = "INSERT INTO subjects (";
+      $query  = "INSERT INTO pages (";
       $query .= " menu_name, position, visible";
       $query .= ") VALUES(";
       $query .= " '{$menu_name}', {$position}, {$visible}";
@@ -33,14 +33,14 @@ if (!empty($errors)) {
       $result = mysqli_query($db, $query);
 
       if ($result){
-         $_SESSION["message"] = "Subject Created!";
+         $_SESSION["message"] = "Page Created!";
          redirect_to("content.php");
 
       } else {
          //failure , mysql rejected the query.
-         $_SESSION["message"] = "<div id=\"confirmado\" >Subject Creation Failed! Ah Shit!</div>";
-         redirect_to("new_subject.php");
-      } 
+         $_SESSION["message"] = "<div id=\"confirmado\" >Page Creation Failed! Ah Shit!</div>";
+         redirect_to("new_page.php");
+      }
       ?>
 
       <?php
