@@ -11,7 +11,6 @@ $id = $_GET["subject"];
 ?>
 <?php
   if (!$sel_subject){
-
     redirect_to("content.php");
 
   }
@@ -111,6 +110,7 @@ if (isset($_POST['submit'])) {
           &nbsp;
           <a href="delete_content.php?subject=<?php echo $id; ?>">Delete Subject</a>
       </h2>
+
   </form>
   </div>
 <?php require("includes/footer.php"); ?>
