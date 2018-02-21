@@ -3,11 +3,6 @@
 <?php require_once("includes/functions.php"); //Functions folder ?>
 <?php include("includes/header.php"); ?>
 <?php
-//This function runs the loop checks and makes data gathered with fetch() available.
-find_selected_page();
-?>
-
-<?php
 $sel_subject = find_subject_by_id($_GET["subject"]);
 if (!$sel_subject){
   redirect_to("content.php");
