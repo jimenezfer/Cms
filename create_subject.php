@@ -19,7 +19,7 @@ validate_max_lengths($fields_with_max_lengths);
 
 if (!empty($errors)) {
    $_SESSION["errors"] = $errors;
-   redirect_to("new_subject.php");
+
 
 }
 
@@ -40,7 +40,7 @@ if (!empty($errors)) {
          //failure , mysql rejected the query.
          $_SESSION["message"] = "<div id=\"confirmado\" >Subject Creation Failed! Ah Shit!</div>";
          redirect_to("new_subject.php");
-      } 
+      }
       ?>
 
       <?php

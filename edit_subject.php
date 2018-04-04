@@ -60,7 +60,7 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-<?php require_once("includes/header.php"); ?>
+<?php require_once("includes/views/header.php"); ?>
 
 <div>
   <div id="navigation">
@@ -109,6 +109,9 @@ if (isset($_POST['submit'])) {
           <a href="content.php">Cancel</a>
           &nbsp;
           <a href="delete_content.php?subject=<?php echo $id; ?>">Delete Subject</a>
+          &nbsp;
+          <a href="new_page.php">New Page</a>
+
       </h2>
 
   </form>

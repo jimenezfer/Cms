@@ -23,7 +23,7 @@ function validate_presences($required_fields) {
 
 		}
 	}
-	
+
 }
 
 // * string length
