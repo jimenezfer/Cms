@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 function message() {
@@ -24,4 +25,3 @@ function errors() {
     return $errors;
   }
 }
-?>
