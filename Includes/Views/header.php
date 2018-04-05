@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
-<meta charset="utf-8"/>
- 				<title>CMS Project</title>
- <link rel="stylesheet" type="text/css" media="all" href="stylesheets/public.css">
- 		<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-		</head>
+    <head>
+        <meta charset="utf-8"/>
+        <title>CMS Project</title>
+        <link rel="stylesheet" type="text/css" media="all" href="stylesheets/public.css">
+        <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+	</head>
  			<body>
 				<div id="header">
  					<h1><a href="content.php" id="titulo">Fox Corp</a></h1>
