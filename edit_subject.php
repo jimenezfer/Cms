@@ -61,7 +61,7 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-<?php require_once("includes/views/header.php"); ?>
+<?php require_once("includes/header.php"); ?>
 
 <div>
   <div id="navigation">
