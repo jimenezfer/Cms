@@ -7,7 +7,7 @@
 
 	function mysql_prep($string) {
 		global $db;
-    	$escaped_string = mysqli_real_escape_string($db, $string);
+    $escaped_string = mysqli_real_escape_string($db, $string);
 		return $escaped_string;
 	}
 
@@ -16,6 +16,7 @@
 			die("Database query failed.");
 		}
 	}
+
 
 	function find_all_subjects() {
 		global $db;

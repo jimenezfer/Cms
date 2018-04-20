@@ -21,21 +21,19 @@ find_selected_page();
       <h2><p>Position:</p>
         <select  name="position">
 
-          <?php
-          $page_set = find_pages_for_subject();
-          $page_count = mysqli_num_rows($page_set);
-          for($count=1; $count <= ($page_count + 1); $count++){
-            echo "<option value=\"{$count}\">{$count}</option>";
-          }
-          ?>
+
+          <option value="">1</option>
+
+
 
         </select>
       </h2>
 
       <h2><p>Subject Id:</p>
-        <select  name="subject_id">
+        <select  name="subject_id" size="0">
 
-        <option value="">1</option>
+        <option value=""><?php echo $sel_subject["menu_name"]; ?></option>
+
 
         </select>
       </h2>

@@ -22,16 +22,16 @@ echo errors();
 
 if (!empty($errors)) {
    $_SESSION["errors"] = $errors;
-   echo "Not empty of errors";
+
 
 
 }
 
 
       $query  = "INSERT INTO pages (";
-      $query .= "menu_name, subject_id, visible, content";
+      $query .= "menu_name, position, subject_id, content, visible";
       $query .= ") VALUES(";
-      $query .= " \"{$menu_name}\", {$position}, {$visible}, \"{$content}\"";
+      $query .= " \"{$menu_name}\", {$position}, {$subject_id}, \"{$content}\", visible";
       $query .= ")";
 
       $result = mysqli_query($db, $query);

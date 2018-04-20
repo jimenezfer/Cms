@@ -6,8 +6,6 @@
 <?php
 //This function runs the loop checks and makes data gathered with fetch() available.
 find_selected_page();
-//temporary solution
-$id = $_GET["subject"];
 
 ?>
 <?php
@@ -51,6 +49,7 @@ if (isset($_POST['submit'])) {
 		} else {
 			// Failure
 			$_SESSION["message"] = "Subject update failed.";
+			 echo "no no no no no no no no no no";
 		}
 
 	}
@@ -109,7 +108,7 @@ if (isset($_POST['submit'])) {
           </br></br>
           <a href="content.php">Cancel</a>
           &nbsp;
-          <a href="delete_content.php?subject=<?php echo $id; ?>">Delete Subject</a>
+          <a href="delete_content.php?subject=<?php echo urlencode($sel_subject["id"]); ?>">Delete Subject</a>
           &nbsp;
           <a href="new_page.php">New Page</a>
 

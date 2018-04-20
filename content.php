@@ -4,14 +4,22 @@
 <?php include("includes/header.php"); ?>
 
 <?php
+
+	find_selected_page();
     // This function runs the loop checks and makes data gathered with fetch() available.
-    find_selected_page();
 ?>
 
 
   <div id="navigation">
 		<?php echo navigation($sel_subject, $sel_page); ?>
 		<br />
+		<?php
+		if(isset($_POST)){
+			$output  = "<h2 class=\"message\">";
+			$output .= $_SESSION["message"];
+			$output .= "</h2>";
+			echo $output; }
+		?>
 		<a href="new_subject.php">+ Add a subject</a>
   </div>
 

@@ -17,7 +17,7 @@ function has_presence($value) {
 function validate_presences($required_fields) {
 	global $errors;
 	foreach ($required_fields as $field) {
-		$value = trim($_POST["$field"]);
+		$value = trim($_POST[$field]);
 		if (!has_presence($value)) {
 			$errors[$field] = fieldname_as_text($field) . "cant be blank";
 
